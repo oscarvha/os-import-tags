@@ -1,0 +1,16 @@
+{
+    "name": "oscar/os-import-tags",
+    "authors": [
+        {
+            "name": "Oscar Sanchez",
+            "email": "oscarsan1986@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.9",
+        "fabpot/goutte": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {"OsImportTags\\": "src/"}
+    }
+}
