@@ -13,7 +13,7 @@
  * Domain Path: /languages/
  */
 
-add_action('admin_menu', 'import_xls_menu');
+
 
 require 'vendor/autoload.php';
 
@@ -25,9 +25,8 @@ use OsImportTags\Exception\ProcessorException;
 use OsImportTags\Processor\RowTagProcessor;
 use OsImportTags\Util\FileReader;
 use OsImportTags\Util\UploadFile;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+const INPUT_FILE_NAME = 'file';
 
 
 /**
@@ -100,7 +99,7 @@ function admin_page_import()
     // this is a WordPress security feature - see: https://codex.wordpress.org/WordPress_Nonces
     wp_nonce_field('import_xls_tags_clicked');
     echo '<input type="file"
-       id="file" name="file" accept=".xls, .xlsx">> ';
+       id="file" name="'.INPUT_FILE_NAME.'"y accept=".xls, .xlsx">> ';
 
 
     echo '<input type="hidden" value="true" name="import_xls_tags" />';
@@ -119,7 +118,8 @@ function importXLSAction()
 {
 
     try {
-        $file = UploadFile::upload('dsg');
+        /** ToDO: verify type File only in html */
+        $file = UploadFile::upload(INPUT_FILE_NAME);
 
         $result = import_xls($file);
         echo '<div id="message" class="updated fade"><p>'
